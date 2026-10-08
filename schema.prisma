@@ -1,0 +1,100 @@
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
+generator client { provider = "prisma-client-js" }
+
+enum Role { CUSTOMER ADMIN }
+enum OrderStatus { PENDING PAID PROCESSING SHIPPED DELIVERED CANCELLED REFUNDED }
+enum PaymentStatus { PENDING PAID FAILED REFUNDED }
+
+model User {
+  id String @id @default(cuid())
+  email String @unique
+  passwordHash String
+  name String
+  phone String?
+  role Role @default(CUSTOMER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  addresses Address[]
+  orders Order[]
+}
+
+model Address {
+  id String @id @default(cuid())
+  userId String
+  label String?
+  recipient String
+  phone String
+  country String
+  city String
+  area String?
+  street String
+  postalCode String?
+  createdAt DateTime @default(now())
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  orders Order[]
+}
+
+model Category {
+  id String @id @default(cuid())
+  name String @unique
+  slug String @unique
+  products Product[]
+}
+
+model Product {
+  id String @id @default(cuid())
+  name String
+  slug String @unique
+  description String?
+  price Decimal @db.Decimal(12,2)
+  compareAt Decimal? @db.Decimal(12,2)
+  currency String @default("EGP")
+  stock Int @default(0)
+  imageUrl String?
+  icon String @default("🛍️")
+  rating Float @default(5)
+  active Boolean @default(true)
+  categoryId String?
+  category Category? @relation(fields:[categoryId], references:[id], onDelete:SetNull)
+  orderItems OrderItem[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([categoryId])
+}
+
+model Order {
+  id String @id @default(cuid())
+  number String @unique
+  userId String?
+  addressId String?
+  status OrderStatus @default(PENDING)
+  paymentStatus PaymentStatus @default(PENDING)
+  subtotal Decimal @db.Decimal(12,2)
+  shippingFee Decimal @db.Decimal(12,2)
+  total Decimal @db.Decimal(12,2)
+  currency String @default("EGP")
+  paymentProvider String?
+  paymentReference String?
+  shippingProvider String?
+  trackingNumber String?
+  notes String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user User? @relation(fields:[userId], references:[id], onDelete:SetNull)
+  address Address? @relation(fields:[addressId], references:[id], onDelete:SetNull)
+  items OrderItem[]
+  @@index([userId])
+  @@index([status])
+}
+
+model OrderItem {
+  id String @id @default(cuid())
+  orderId String
+  productId String
+  productName String
+  unitPrice Decimal @db.Decimal(12,2)
+  quantity Int
+  lineTotal Decimal @db.Decimal(12,2)
+  order Order @relation(fields:[orderId], references:[id], onDelete:Cascade)
+  product Product @relation(fields:[productId], references:[id], onDelete:Restrict)
+}
