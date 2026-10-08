@@ -1,0 +1,11 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: orange
+      POSTGRES_PASSWORD: orange
+      POSTGRES_DB: orange_store
+    ports: ["5432:5432"]
+    volumes: ["orange_pg:/var/lib/postgresql/data"]
+volumes: {orange_pg: {}}

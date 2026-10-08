@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>برتقالة | كل ما تحتاجه في مكان واحد</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="topbar">
+    <div>خدمة عملاء 24/7 🎧</div>
+    <div>دفع آمن 🔒</div>
+    <div>شحن سريع لجميع الدول 🚚</div>
+    <div class="markets"><span>🇦🇪 الإمارات</span><span>🇸🇦 السعودية</span><span>🇪🇬 مصر</span></div>
+  </div>
+
+  <header class="header">
+    <a class="brand" href="#"><span class="orange">●</span><div><strong>برتقالة</strong><small>كل ما تحتاجه .. في مكان واحد</small></div></a>
+    <div class="search"><span>⌕</span><input id="searchInput" type="search" autocomplete="off" aria-label="البحث عن المنتجات" placeholder="إبحث عن منتج، ماركة أو فئة..."></div>
+    <div class="actions">
+      <button type="button" aria-label="المفضلة">♡<small>المفضلة</small></button>
+      <button type="button" aria-label="حسابي" id="accountBtn">♙<small>حسابي</small></button>
+      <button type="button" class="cartBtn" onclick="openCart()" aria-label="فتح السلة">🛒<b id="cartCount">0</b><small>السلة</small></button>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <a class="active" href="#">الصفحة الرئيسية</a>
+    <a href="#electronics">الإلكترونيات</a>
+    <a href="#home">المنزل والمطبخ</a>
+    <a href="#fashion">الأزياء والموضة</a>
+    <a href="#beauty">الجمال والعناية</a>
+    <a href="#sport">الرياضة واللياقة</a>
+    <a href="#kids">الأطفال</a>
+    <a href="#more">المزيد</a>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="heroText">
+        <div class="logoText">برتقالة <span>🍊</span></div>
+        <h1>متجرك المفضل في مصر والسعودية والإمارات</h1>
+        <p>منتجات أصلية • أسعار مميزة • توصيل سريع</p>
+        <a href="#offers" class="primary">تسوق الآن ←</a>
+      </div>
+      <div class="heroArt">
+        <div class="bag">🛍️</div><div class="phone">📱</div><div class="laptop">💻</div>
+        <div class="shoe">👟</div><div class="watch">⌚</div><div class="headphones">🎧</div>
+      </div>
+      <div class="dots">● ● ● ● ●</div>
+    </section>
+
+    <section class="countryGrid">
+      <article><span class="flag">🇦🇪</span><div><b>الإمارات</b><small>دليل التسوق في الإمارات</small></div><strong>‹</strong></article>
+      <article><span class="flag">🇸🇦</span><div><b>السعودية</b><small>دليل التسوق في السعودية</small></div><strong>‹</strong></article>
+      <article><span class="flag">🇪🇬</span><div><b>مصر</b><small>دليل التسوق في مصر</small></div><strong>‹</strong></article>
+    </section>
+
+    <section class="categories">
+      <div>📱<span>الإلكترونيات</span></div><div>🏠<span>المنزل والمطبخ</span></div>
+      <div>👕<span>الأزياء والموضة</span></div><div>🧴<span>الجمال والعناية</span></div>
+      <div>🏋️<span>الرياضة واللياقة</span></div><div>🧸<span>الأطفال</span></div>
+      <div>📚<span>الكتب والهوايات</span></div><div>▦<span>المزيد</span></div>
+    </section>
+
+    <section id="offers" class="section">
+      <div class="sectionHead"><h2>🔥 عروض مميزة</h2><a href="#">عرض الكل ←</a></div>
+      <div class="products" id="products"></div>
+    </section>
+
+    <section class="benefits">
+      <div>🛡️<b>منتجات أصلية</b><span>جميع المنتجات مضمونة</span></div>
+      <div>↩️<b>إرجاع سهل</b><span>خلال 14 يوم</span></div>
+      <div>🚚<b>شحن سريع</b><span>لجميع الدول</span></div>
+      <div>💳<b>دفع آمن</b><span>متوفر جميع وسائل الدفع</span></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footerBrand"><div class="footerLogo">برتقالة 🍊</div><p>كل ما تحتاجه .. في مكان واحد</p><div>◎　f　𝕏　♪　▶</div></div>
+    <div><h3>خدماتنا</h3><p>تتبع الطلب</p><p>الإرجاع والاستبدال</p><p>خدمة العملاء</p></div>
+    <div><h3>مساعدة</h3><p>الأسئلة الشائعة</p><p>سياسة الخصوصية</p><p>شروط الاستخدام</p></div>
+    <div class="copy">© 2026 برتقالة. جميع الحقوق محفوظة.</div>
+  </footer>
+
+  <aside id="cart" class="cartPanel">
+    <button class="close" onclick="closeCart()">×</button><h2>سلة التسوق</h2>
+    <div id="cartItems"></div><div class="total">الإجمالي: <b id="cartTotal">0</b> ج.م</div>
+    <button class="checkout" type="button">إتمام الطلب</button>
+  </aside>
+  <div id="overlay" class="overlay" onclick="closeCart()"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
